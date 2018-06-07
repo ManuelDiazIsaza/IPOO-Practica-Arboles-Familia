@@ -62,6 +62,8 @@ int main()
   //  familia2->imprimirHijos();
  //    arbol->insertaFinal(&familia1);
   //   arbol->insertaFinal(&familia2);
+
+
     arbol->imprimir();
 
  //   cout << arbol->buscarPersona(45)->getVivo();
