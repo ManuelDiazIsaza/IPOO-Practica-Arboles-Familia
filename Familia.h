@@ -31,15 +31,16 @@ protected:
     Familia *ant;
 public:
     Familia();
-    Familia(Persona *padre, Persona *madre);
+    Familia(Persona *padre, Persona *madre); // este constructor se usa solo para pruebas
     ~Familia();
     void setPadre(Persona *padre);
     Persona *getPadre();
     void setMadre(Persona *madre);
     Persona *getMadre();
     void nacimiento();
-    void nacimiento(int id,string nombre, string apellido, bool hombre, int edad);
+    void nacimiento(int id,string nombre, string apellido, bool hombre, int edad, bool casado); // este nacimiento se usa solo para pruebas
     void imprimirHijos();
+    void imprimirNietos();
     Persona *getHijosCab();
     void setSig(Familia *sig);
     Familia *getSig();

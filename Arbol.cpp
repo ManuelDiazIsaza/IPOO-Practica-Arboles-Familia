@@ -318,6 +318,88 @@ void Arbol::estadoCivil()
     }
 }
 
+void Arbol::nietosPersona()
+{
+    int id;
+
+    cout << "Ingrese el id de la persona que desea consultar sus nietos:";
+    cin >> id;
+    Persona *persona =  buscarPersona(id);
+    bool nietos= false;
+
+
+    if(persona== nullptr)
+    {
+        cout<< "No se encontro el id de esa persona, por favor verifique los datos" << endl;
+        nietos = true;
+    }
+    else if(!persona->getCasado())
+    {
+        cout<<"Esta persona no esta casado, no tiene nietos" << endl;
+        nietos = true;
+    }
+    else
+    {
+        Familia *desplazaF = cab;
+
+        while(desplazaF != nullptr){
+
+            if(desplazaF->getPadre()->getId() == id || desplazaF->getMadre()->getId() == id)
+            {
+                Persona *desplazaH = desplazaF->getHijosCab();
+
+                while(desplazaH!= nullptr)
+                {
+
+                    if(desplazaH->getCasado())
+                    {
+                    Familia *desplazaF2 = cab;
+                    while(desplazaF2!= nullptr)
+                    {
+                        if(desplazaF2->getPadre()->getId() == desplazaH->getId() || desplazaF2->getMadre()->getId() == desplazaH->getId())
+                        {
+                            if(desplazaF2->getHijosCab()== nullptr)
+                            {
+                                desplazaF2 = desplazaF2->getSig();
+                            }
+                            else
+                            {
+                            cout << "Nietos de " << persona->getNombre() << " por parte de "<< desplazaH->getNombre() << ": ";
+                            desplazaF2->imprimirNietos();
+                            desplazaF2 = desplazaF2->getSig();
+                            nietos = true;
+                            }
+                        }
+                        else
+                        {
+                            desplazaF2 = desplazaF2->getSig();
+                        }
+                    }
+                    desplazaH = desplazaH->getSig();
+                    }
+                    else
+                    {
+                        desplazaH = desplazaH->getSig();
+                    }
+                }
+                desplazaF = desplazaF ->getSig();
+            }
+            else
+            {
+                desplazaF = desplazaF->getSig();
+            }
+        }
+
+
+    }
+
+    if(!nietos)
+    {
+        cout << "Esta persona no tiene nietos." << endl;
+    }
+
+}
+
 void Arbol::interfazPPal()
 {
     int opcion = 0;
@@ -357,10 +439,13 @@ void Arbol::interfazPPal()
                     case 6:
                         estadoCivil();
                         break;
+                    case 7:
+                        nietosPersona();
+                        break;
                     default:
-                        if (opcion != 7)
+                        if (opcion != 10)
                             cout << endl << "=== Opcion no valida ===" << endl;
                 }
 
-            } while (opcion != 7);
+            } while (opcion != 10);
 }

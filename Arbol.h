@@ -18,7 +18,7 @@ public:
     Arbol();
     ~Arbol();
     void matrimonio();
-    Persona *buscarPersona(int); // Busca en hijos y padres de todas las familias.
+    Persona* buscarPersona(int); // Busca en hijos y padres de todas las familias.
     void insertaFinal(Familia *familia);
     void imprimir();
     void nacimiento();
@@ -26,5 +26,6 @@ public:
     void hijosPersona();
     void estadoCivil();
     void interfazPPal();
+    void nietosPersona();
 };
 #endif //ARBOL_H

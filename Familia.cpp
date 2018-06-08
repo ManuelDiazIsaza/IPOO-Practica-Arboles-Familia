@@ -110,7 +110,7 @@ void Familia::nacimiento()
 
 }
 
-void Familia::nacimiento(int id,string nombre, string apellido, bool hombre,int edad)
+void Familia::nacimiento(int id,string nombre, string apellido, bool hombre,int edad,bool casado)
 {
 
     Persona *nuevo = new Persona();
@@ -120,6 +120,7 @@ void Familia::nacimiento(int id,string nombre, string apellido, bool hombre,int 
     nuevo->setHombre(hombre);
     nuevo->setEdad(edad);
     nuevo->setVivo(true);
+    nuevo->setCasado(casado);
     nuevo->setPapa(padre);
     nuevo->setMama(madre);
 
@@ -155,6 +156,26 @@ void Familia::imprimirHijos()
         }
         }
         cout << endl;
+}
+
+void Familia::imprimirNietos()
+{
+    Persona *desplaza = hijoscab;
+
+    if(hijoscab == nullptr)
+    {
+        cout << "Esta familia no tiene hijos.";
+    }
+    else
+    {
+        //cout << "Hijo(s): ";
+        while (desplaza != NULL)
+        {
+            cout << desplaza->getNombre() << " - ";
+            desplaza = desplaza->getSig();
+        }
+    }
+    cout << endl;
 }
 
 Persona* Familia::getHijosCab()
