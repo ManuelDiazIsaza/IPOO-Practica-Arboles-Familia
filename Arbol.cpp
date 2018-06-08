@@ -325,18 +325,16 @@ void Arbol::nietosPersona()
     cout << "Ingrese el id de la persona que desea consultar sus nietos:";
     cin >> id;
     Persona *persona =  buscarPersona(id);
-    bool nietos= false;
+    bool nonietos = true;
 
 
     if(persona== nullptr)
     {
         cout<< "No se encontro el id de esa persona, por favor verifique los datos" << endl;
-        nietos = true;
     }
     else if(!persona->getCasado())
     {
         cout<<"Esta persona no esta casado, no tiene nietos" << endl;
-        nietos = true;
     }
     else
     {
@@ -367,7 +365,7 @@ void Arbol::nietosPersona()
                             cout << "Nietos de " << persona->getNombre() << " por parte de "<< desplazaH->getNombre() << ": ";
                             desplazaF2->imprimirNietos();
                             desplazaF2 = desplazaF2->getSig();
-                            nietos = true;
+                            nonietos = false;
                             }
                         }
                         else
@@ -393,7 +391,7 @@ void Arbol::nietosPersona()
 
     }
 
-    if(!nietos)
+    if(nonietos)
     {
         cout << "Esta persona no tiene nietos." << endl;
     }
@@ -406,8 +404,8 @@ void Arbol::interfazPPal()
 
             do
             {
-                cout << ":::::::::::::::::::::::::::::MENU PRINCIPAL:::::::::::::::::::::::" << endl;
-                cout << "------------- Arbol Genealogico -------------" << endl;
+                cout << ":::::::::::::::: MENU PRINCIPAL ::::::::::::::::" << endl;
+                cout << "-------------- Arbol Genealogico --------------" << endl;
                 cout << "1: Nuevo Matrimonio" << endl;
                 cout << "2: Nuevo Nacimiento" << endl;
                 cout << "3: Fallecimiento" << endl;
