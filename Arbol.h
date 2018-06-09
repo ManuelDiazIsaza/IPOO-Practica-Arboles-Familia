@@ -1,6 +1,16 @@
-//
-// Created by Manuel Diaz on 5/06/2018.
-//
+/*
+  Archivo: Arbol.h
+  Autor: Manuel Diaz COD 1741652 - Jeffrey Rios COD 1744831
+  Email: manuel.isaza@correounivalle.edu.co - jeffrey.rios@correounivalle.edu.co
+  Fecha creacion: 2018-06-01
+  Fecha ultima modificacion: 2018-06-09
+  Version: 0.1
+  Licencia: GPL
+*/
+
+// Clase: Familia
+// Responsabilidad:
+// Colaboracion: ninguna
 
 #ifndef ARBOL_H
 #define ARBOL_H
@@ -27,5 +37,7 @@ public:
     void estadoCivil();
     void interfazPPal();
     void nietosPersona();
+    void abuelosPersona();
+    void padresHermanosPersona();
 };
 #endif //ARBOL_H

@@ -1,16 +1,16 @@
 /*
-  Archivo: Nodo.h
-  Autor: Luis Yovany Romo
-  Email: luis.romo@correounivalle.edu.co
-  Fecha creaciC3n: 2018-02-09
-  Fecha Cltima modificaciC3n: 2018-02-09
-  VersiC3n: 0.1
+  Archivo: Familia.h
+  Autor: Manuel Diaz COD 1741652 - Jeffrey Rios COD 1744831
+  Email: manuel.isaza@correounivalle.edu.co - jeffrey.rios@correounivalle.edu.co
+  Fecha creacion: 2018-06-01
+  Fecha ultima modificacion: 2018-06-09
+  Version: 0.1
   Licencia: GPL
 */
 
-// Clase: Nodo
-// Responsabilidad: elemento (nodo) de un arbol
-// ColaboraciCB3n: ninguna
+// Clase: Familia
+// Responsabilidad:
+// Colaboracion: ninguna
 
 
 #ifndef FAMILIA_H

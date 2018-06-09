@@ -1,6 +1,17 @@
-//
-// Created by Manuel Diaz on 5/06/2018.
-//
+/*
+  Archivo: main.cpp
+  Autor: Manuel Diaz COD 1741652 - Jeffrey Rios COD 1744831
+  Email: manuel.isaza@correounivalle.edu.co - jeffrey.rios@correounivalle.edu.co
+  Fecha creacion: 2018-06-01
+  Fecha ultima modificacion: 2018-06-09
+  Version: 0.1
+  Licencia: GPL
+*/
+
+// Clase: Familia
+// Responsabilidad:
+// Colaboracion: ninguna
+
 #include "Arbol.h"
 #include "Familia.h"
 #include <iostream>
@@ -16,8 +27,8 @@ int main()
     Persona *pilar = new Persona(05,"Pilar","Isaza",55,false,false,nullptr, nullptr,true);
 
     Persona *jeffrey = new Persona(31,"Jeffrey","Rios",27,true,true, nullptr, nullptr,true);
-    Persona *paola = new Persona(03,"Paola","Ceballos",34,true,false,pilar,gerardo,true);
-    Persona *ricardo = new Persona(02,"Ricardo","Ceballos",37,true,true,pilar,gerardo,false);
+    Persona *paola = new Persona(03,"Paola","Diaz",34,true,false,pilar,gerardo,true);
+    Persona *ricardo = new Persona(02,"Ricardo","Diaz",37,true,true,pilar,gerardo,false);
 
     Persona *manuel = new Persona(01,"Manuel","Diaz",31,true,true,pilar,gerardo,true);
     Persona *jennifer = new Persona(96,"Jennifer","Mino",29,true,false, nullptr, nullptr,true);
@@ -27,8 +38,8 @@ int main()
     Familia *familia1 = new Familia();
     familia1->setPadre(gerardo);
     familia1->setMadre(pilar);
-    familia1->nacimiento(02,"Ricardo","Ceballos",true,37,false);
-    familia1->nacimiento(03,"Paola","Ceballos",false,34,true);
+    familia1->nacimiento(02,"Ricardo","Diaz",true,37,false);
+    familia1->nacimiento(03,"Paola","Diaz",false,34,true);
     familia1->nacimiento(01,"Manuel","Diaz",true,31,true);
 
     Familia *familia2 = new Familia(manuel,jennifer);

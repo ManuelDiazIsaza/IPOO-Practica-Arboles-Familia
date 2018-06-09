@@ -1,6 +1,16 @@
-//
-// Created by Manuel Diaz on 5/06/2018.
-//
+/*
+  Archivo: Arbol.cpp
+  Autor: Manuel Diaz COD 1741652 - Jeffrey Rios COD 1744831
+  Email: manuel.isaza@correounivalle.edu.co - jeffrey.rios@correounivalle.edu.co
+  Fecha creacion: 2018-06-01
+  Fecha ultima modificacion: 2018-06-09
+  Version: 0.1
+  Licencia: GPL
+*/
+
+// Clase: Familia
+// Responsabilidad:
+// Colaboracion: ninguna
 
 #include "Arbol.h"
 #include <iostream>
@@ -185,8 +195,8 @@ void Arbol::imprimir()
     {
 
         cout<<"\nFamilia "<<i<<endl;
-        cout<<"Padre: " << desplaza->getPadre()->getNombre() << endl;
-        cout<<"Madre: " << desplaza->getMadre()->getNombre() << endl;
+        cout<<"Padre: " << desplaza->getPadre()->getNombre() << " " << desplaza->getPadre()->getApellidos() << endl;
+        cout<<"Madre: " << desplaza->getMadre()->getNombre() << " " << desplaza->getMadre()->getApellidos() << endl;
         desplaza->imprimirHijos();
         desplaza = desplaza->getSig();
         i++;
@@ -202,7 +212,7 @@ void Arbol::nacimiento()
     do
     {
     Familia *desplaza = cab;
-    cout << "Ingrese el id de la persona que tuvo un hijo: " ;
+    cout << "Ingrese el id de la persona que tuvo hijo(s): " ;
     cin >> id;
 
     while (desplaza != nullptr)
@@ -398,6 +408,114 @@ void Arbol::nietosPersona()
 
 }
 
+void Arbol::abuelosPersona()
+{
+    int id;
+
+    cout << "Ingrese el id de la persona que desea consultar sus abuelos:";
+    cin >> id;
+    Persona *persona =  buscarPersona(id);
+
+
+    if(persona == nullptr)
+    {
+        cout << "Este ID no corresponde a ningun miembro de la familia." << endl;
+    }
+    else if(persona->getId()== cab->getPadre()->getId() || persona->getId()== cab->getMadre()->getId())
+    {
+        cout << "Este es el papa o mama de la familia Genesis por lo tanto no tienen abuelos registrados." << endl;
+    }
+    else if(persona->getPapa()== nullptr && persona->getMama()== nullptr)
+    {
+        cout << "Este es el esposo o esposa de uno de los miembros de la familia por lo tanto no tienen abuelos registrados." << endl;
+    }
+    else if(persona->getPapa()->getPapa()!= nullptr)
+    {
+        cout << "Los abuelos por parte de papa son: " << endl;
+        cout << "Abuelo: " <<persona->getPapa()->getPapa()->getNombre() << " " << persona->getPapa()->getPapa()->getApellidos() << endl;
+        cout << "Abuela: " <<persona->getPapa()->getMama()->getNombre() << " " << persona->getPapa()->getMama()->getApellidos() << endl;
+    }
+    else if(persona->getMama()->getMama()!= nullptr)
+    {
+        cout << "Los abuelos por parte de mama son: " << endl;
+        cout << "Abuelo: " <<persona->getMama()->getPapa()->getNombre() << " " << persona->getMama()->getPapa()->getApellidos() << endl;
+        cout << "Abuela: " <<persona->getMama()->getMama()->getNombre() << " " << persona->getMama()->getMama()->getApellidos() << endl;
+    }
+    else
+    {
+        cout << "Esta persona no tiene abuelos registrados en el arbol genealogico." << endl;
+    }
+}
+
+void Arbol::padresHermanosPersona()
+{
+    int id;
+
+    cout << "Ingrese el id de la persona que desea consultar sus padres y hermanos:";
+    cin >> id;
+    Persona *persona = buscarPersona(id);
+    Familia *familia;
+
+    Familia *desplazaF = cab;
+
+    while(desplazaF != nullptr)
+    {
+            Persona *desplazaH = desplazaF->getHijosCab();
+            while(desplazaH != nullptr)
+            {
+                if(desplazaH->getId() == id)
+                {
+                    familia = desplazaF;
+                    desplazaH = desplazaH->getSig();
+                }
+                else
+                {
+                    desplazaH = desplazaH->getSig();
+                }
+            }
+        desplazaF = desplazaF->getSig();
+    }
+
+    if(persona == nullptr)
+    {
+        cout << "Este ID no corresponde a ningun miembro de la familia." << endl;
+    }
+    else if(persona->getId()== cab->getPadre()->getId() || persona->getId()== cab->getMadre()->getId())
+    {
+        cout << "Este es el papa o mama de la familia Genesis por lo tanto no tiene hermanos ni padres registrados." << endl;
+    }
+    else if(persona->getPapa()== nullptr && persona->getMama()== nullptr)
+    {
+        cout << "Este es el esposo o esposa de uno de los miembros de la familia por lo tanto no tiene hermanos ni padres registrados." << endl;
+    }
+    else
+    {
+        cout << "El papa es: " << familia->getPadre()->getNombre() << " " << familia->getPadre()->getApellidos() << endl;
+        cout << "La mama es: " << familia->getMadre()->getNombre() << " " << familia->getMadre()->getApellidos() << endl;
+        cout << "Los hermanos son:" << endl;
+
+        bool hermanos = false;
+        Persona *desplaza = familia->getHijosCab();
+        while(desplaza!= nullptr)
+        {
+            if(desplaza->getId() == id)
+            {
+                desplaza = desplaza->getSig();
+            }
+            else
+            {
+                hermanos = true;
+                cout << desplaza->getNombre() << " " << desplaza->getApellidos() << endl;
+                desplaza = desplaza->getSig();
+            }
+        }
+        if(!hermanos)
+        {
+            cout << "No tiene hermanos." << endl;
+        }
+    }
+}
+
 void Arbol::interfazPPal()
 {
     int opcion = 0;
@@ -415,6 +533,7 @@ void Arbol::interfazPPal()
                 cout << "7: Consultar nietos de una persona." << endl;
                 cout << "8: Consultar abuelos de una persona." << endl;
                 cout << "9: Consultar padres y hermanos de una persona." << endl;
+                cout << "10: Salir." << endl;
 
                 cout << "Su opcion: " << endl;
                 cin >> opcion;
@@ -439,6 +558,12 @@ void Arbol::interfazPPal()
                         break;
                     case 7:
                         nietosPersona();
+                        break;
+                    case 8:
+                        abuelosPersona();
+                        break;
+                    case 9:
+                        padresHermanosPersona();
                         break;
                     default:
                         if (opcion != 10)

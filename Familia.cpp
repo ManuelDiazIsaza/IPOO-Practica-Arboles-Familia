@@ -1,12 +1,16 @@
 /*
-  Archivo: Nodo.cpp
-  Autor: Luis Yovany Romo Portilla
-  Email: luis.romo@correounivalle.edu.co
-  Fecha creaciC3n: 2017-08-31
-  Fecha C:ltima modificaciC3n: 2017-08-31
-  VersiC3n: 0.1
+  Archivo: Familia.cpp
+  Autor: Manuel Diaz COD 1741652 - Jeffrey Rios COD 1744831
+  Email: manuel.isaza@correounivalle.edu.co - jeffrey.rios@correounivalle.edu.co
+  Fecha creacion: 2018-06-01
+  Fecha ultima modificacion: 2018-06-09
+  Version: 0.1
   Licencia: GPL
 */
+
+// Clase: Familia
+// Responsabilidad:
+// Colaboracion: ninguna
 
 #include <iostream>
 #include "Familia.h"
@@ -151,8 +155,17 @@ void Familia::imprimirHijos()
         cout << "Hijo(s): ";
         while (desplaza != NULL)
         {
-            cout << desplaza->getNombre() << " - ";
-            desplaza = desplaza->getSig();
+            if(desplaza->getSig()== nullptr)
+            {
+                cout << desplaza->getNombre() << " " << desplaza->getApellidos();
+                desplaza = desplaza->getSig();
+            }
+            else
+            {
+                cout << desplaza->getNombre() << " " << desplaza->getApellidos() << " - ";
+                desplaza = desplaza->getSig();
+            }
+
         }
         }
         cout << endl;
