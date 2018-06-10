@@ -24,7 +24,13 @@ Arbol::Arbol()
 
 Arbol::~Arbol()
 {
-    //MC)todo destructor
+    Familia *desplaza = cab;
+
+    while(desplaza != nullptr)
+    {
+        delete desplaza;
+        desplaza = desplaza->getSig();
+    }
 }
 
 void Arbol::matrimonio()
@@ -505,7 +511,7 @@ void Arbol::familiaresHastaTercer()
 {
     int id;
 
-    cout << "Ingrese el id de la persona que desea consultar sus abuelos:";
+    cout << "Ingrese el id de la persona que desea consultar sus familiares:";
     cin >> id;
     Persona *persona =  buscarPersona(id);
 
@@ -573,7 +579,7 @@ void Arbol::familiaresHastaTercer()
 
         //hermanos
         Familia *desplazaF = cab;
-        Familia *familia;
+        Familia *familia = nullptr;
 
 
         while(desplazaF != nullptr)
@@ -595,6 +601,9 @@ void Arbol::familiaresHastaTercer()
         }
 
         bool hermanos = false;
+
+        if(familia!= nullptr)
+        {
         Persona *desplaza = familia->getHijosCab();
         cout << "Hermanos: " << endl;
 
@@ -615,6 +624,7 @@ void Arbol::familiaresHastaTercer()
         if(!hermanos)
         {
             cout << "No tiene hermanos." << endl;
+        }
         }
 
         //nietos
@@ -686,12 +696,15 @@ void Arbol::familiaresHastaTercer()
         cout << "Tercer Grado de Consanguinidad.(Tios, Sobrinos)" << endl;
 
         // tios
+        Familia *familia = nullptr;
 
+        if(persona->getPapa()!= nullptr && persona->getMama()!= nullptr)
+        {
         Persona *papa = persona->getPapa();
         Persona *mama = persona->getMama();
 
         Familia *desplazaF = cab;
-        Familia *familia;
+
 
 
         while (desplazaF != nullptr) {
@@ -706,7 +719,12 @@ void Arbol::familiaresHastaTercer()
             }
             desplazaF = desplazaF->getSig();
         }
+        }
 
+        if(familia!= nullptr)
+        {
+        Persona *papa = persona->getPapa();
+        Persona *mama = persona->getMama();
         Persona *desplaza = familia->getHijosCab();
         cout << "Tios: " << endl;
 
@@ -722,11 +740,12 @@ void Arbol::familiaresHastaTercer()
                 desplaza = desplaza->getSig();
             }
         }
+        }
 
         //sobrinos
 
         Familia *desplazaF2 = cab;
-        Familia *familia2;
+        Familia *familia2 = nullptr;
 
 
         while(desplazaF2 != nullptr)
@@ -747,6 +766,8 @@ void Arbol::familiaresHastaTercer()
             desplazaF2 = desplazaF2->getSig();
         }
 
+        if(familia2!= nullptr)
+        {
         bool sobrinos = false;
         Persona *desplaza2 = familia2->getHijosCab();
         cout << endl << "Sobrinos: " << endl;
@@ -787,8 +808,9 @@ void Arbol::familiaresHastaTercer()
 
         cout << endl;
     }
+    }
 
-
+cout << endl;
 
 }
 
