@@ -184,8 +184,16 @@ void Familia::imprimirNietos()
         //cout << "Hijo(s): ";
         while (desplaza != NULL)
         {
-            cout << desplaza->getNombre() << " - ";
-            desplaza = desplaza->getSig();
+            if(desplaza->getSig()== nullptr)
+            {
+                cout << desplaza->getNombre() << " " << desplaza->getApellidos();
+                desplaza = desplaza->getSig();
+            }
+            else
+            {
+                cout << desplaza->getNombre() << " " << desplaza->getApellidos() << " - ";
+                desplaza = desplaza->getSig();
+            }
         }
     }
     cout << endl;

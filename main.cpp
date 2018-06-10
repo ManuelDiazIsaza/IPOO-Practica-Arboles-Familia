@@ -61,6 +61,8 @@ int main()
 
     arbol->interfazPPal();
 
+    delete arbol;
+    arbol = 0;
     return 0;
 }
 

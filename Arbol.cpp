@@ -116,7 +116,6 @@ void Arbol::matrimonio()
 Persona* Arbol::buscarPersona(int id)
 {
     Familia *desplazaF = cab;
-    //Persona *encontrado;
 
     while(desplazaF != nullptr)
     {
@@ -172,20 +171,6 @@ void Arbol::insertaFinal(Familia *familia)
     }
     //cout << familia->getMadre()->getNombre() << " - " << familia->getPadre()->getNombre();
 }
-/*
-void Arbol::imprimir()
-{
-    Familia *desplaza = cab;
-    while (desplaza != nullptr)
-    {
-
-        cout << desplaza->getPadre()->getNombre() << endl;
-        cout << desplaza->getMadre()->getNombre() << endl;
-        desplaza = desplaza->getSig();
-    }
-    cout << endl;
-}
-*/
 
 void Arbol::imprimir()
 {
@@ -722,7 +707,6 @@ void Arbol::familiaresHastaTercer()
             desplazaF = desplazaF->getSig();
         }
 
-        bool hermanos = false;
         Persona *desplaza = familia->getHijosCab();
         cout << "Tios: " << endl;
 
@@ -741,8 +725,67 @@ void Arbol::familiaresHastaTercer()
 
         //sobrinos
 
+        Familia *desplazaF2 = cab;
+        Familia *familia2;
 
 
+        while(desplazaF2 != nullptr)
+        {
+            Persona *desplazaH = desplazaF2->getHijosCab();
+            while(desplazaH != nullptr)
+            {
+                if(desplazaH->getId() == id)
+                {
+                    familia2 = desplazaF2;
+                    desplazaH = desplazaH->getSig();
+                }
+                else
+                {
+                    desplazaH = desplazaH->getSig();
+                }
+            }
+            desplazaF2 = desplazaF2->getSig();
+        }
+
+        bool sobrinos = false;
+        Persona *desplaza2 = familia2->getHijosCab();
+        cout << endl << "Sobrinos: " << endl;
+
+        while(desplaza2!= nullptr)
+        {
+            if(desplaza2->getId() == id)
+            {
+                desplaza2 = desplaza2->getSig();
+            }
+            else
+            {
+                cout << "Sobrinos por parte de: " << desplaza2->getNombre() << " " << desplaza2->getApellidos() << endl;
+
+                Familia *desplazaF3 = cab;
+                while(desplazaF3!= nullptr)
+                {
+                    if(desplazaF3->getPadre()->getId() == desplaza2->getId() || desplazaF3->getMadre()->getId() == desplaza2->getId())
+                    {
+                        sobrinos = true;
+                        desplazaF3->imprimirNietos();
+                        desplazaF3 = desplazaF3->getSig();
+                        cout << endl;
+                    }
+                    else
+                    {
+                        desplazaF3 = desplazaF3->getSig();
+                    }
+                }
+                desplaza2 = desplaza2->getSig();
+            }
+        }
+
+        if(!sobrinos)
+        {
+            cout << "No tiene sobrinos." << endl;
+        }
+
+        cout << endl;
     }
 
 
