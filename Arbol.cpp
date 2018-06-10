@@ -516,6 +516,239 @@ void Arbol::padresHermanosPersona()
     }
 }
 
+void Arbol::familiaresHastaTercer()
+{
+    int id;
+
+    cout << "Ingrese el id de la persona que desea consultar sus abuelos:";
+    cin >> id;
+    Persona *persona =  buscarPersona(id);
+
+    // padres e hijos
+    if(persona == nullptr)
+    {
+        cout << "Este ID no corresponde a ningun miembro de la familia." << endl;
+    }
+    else
+    {
+        cout << endl << "Familiares de " << persona->getNombre() << " " << persona->getApellidos() << endl << endl;
+        cout << "Primer Grado de Consanguinidad. (Padres,Hijos)" << endl;
+        //padres
+        if (persona->getPapa() != nullptr) {
+            cout << "Padres: " << endl;
+            cout << "Papa: " << persona->getPapa()->getNombre() << " " << persona->getPapa()->getApellidos() << endl;
+            cout << "Mama: " << persona->getMama()->getNombre() << " " << persona->getMama()->getApellidos() << endl;
+        }
+        //hijos
+        Familia *desplazaF = cab;
+
+        while (desplazaF != nullptr) {
+            if (desplazaF->getPadre()->getId() == id || desplazaF->getMadre()->getId() == id) {
+                desplazaF->imprimirHijos();
+                desplazaF = desplazaF->getSig();
+            } else {
+                desplazaF = desplazaF->getSig();
+            }
+        }
+    }
+
+    cout << endl;
+    // abuelos, hermanos, nietos
+    if(persona == nullptr)
+    {
+    }
+    else
+    {
+        cout << "Segundo Grado de Consanguinidad.(Abuelos,Hermanos,Nietos)" << endl;
+
+        // abuelos
+        if(persona->getId()== cab->getPadre()->getId() || persona->getId()== cab->getMadre()->getId())
+        {
+        }
+        else if(persona->getPapa()== nullptr && persona->getMama()== nullptr)
+        {
+        }
+        else if(persona->getPapa()->getPapa()!= nullptr)
+        {
+            cout << "Abuelos" << endl;
+            cout << "Los abuelos por parte de papa son: " << endl;
+            cout << "Abuelo: " <<persona->getPapa()->getPapa()->getNombre() << " " << persona->getPapa()->getPapa()->getApellidos() << endl;
+            cout << "Abuela: " <<persona->getPapa()->getMama()->getNombre() << " " << persona->getPapa()->getMama()->getApellidos() << endl;
+        }
+        else if(persona->getMama()->getMama()!= nullptr)
+        {
+            cout << "Abuelos" << endl;
+            cout << "Los abuelos por parte de mama son: " << endl;
+            cout << "Abuelo: " <<persona->getMama()->getPapa()->getNombre() << " " << persona->getMama()->getPapa()->getApellidos() << endl;
+            cout << "Abuela: " <<persona->getMama()->getMama()->getNombre() << " " << persona->getMama()->getMama()->getApellidos() << endl;
+        }
+        else
+        {
+        }
+
+        //hermanos
+        Familia *desplazaF = cab;
+        Familia *familia;
+
+
+        while(desplazaF != nullptr)
+        {
+            Persona *desplazaH = desplazaF->getHijosCab();
+            while(desplazaH != nullptr)
+            {
+                if(desplazaH->getId() == id)
+                {
+                    familia = desplazaF;
+                    desplazaH = desplazaH->getSig();
+                }
+                else
+                {
+                    desplazaH = desplazaH->getSig();
+                }
+            }
+            desplazaF = desplazaF->getSig();
+        }
+
+        bool hermanos = false;
+        Persona *desplaza = familia->getHijosCab();
+        cout << "Hermanos: " << endl;
+
+        while(desplaza!= nullptr)
+        {
+            if(desplaza->getId() == id)
+            {
+                desplaza = desplaza->getSig();
+            }
+            else
+            {
+                hermanos = true;
+                cout << desplaza->getNombre() << " " << desplaza->getApellidos() << endl;
+                desplaza = desplaza->getSig();
+            }
+        }
+
+        if(!hermanos)
+        {
+            cout << "No tiene hermanos." << endl;
+        }
+
+        //nietos
+
+        if(!persona->getCasado())
+        {
+        }
+        else
+        {
+            Familia *desplazaF = cab;
+
+            while(desplazaF != nullptr){
+
+                if(desplazaF->getPadre()->getId() == id || desplazaF->getMadre()->getId() == id)
+                {
+                    Persona *desplazaH = desplazaF->getHijosCab();
+
+                    while(desplazaH!= nullptr)
+                    {
+
+                        if(desplazaH->getCasado())
+                        {
+                            Familia *desplazaF2 = cab;
+                            while(desplazaF2!= nullptr)
+                            {
+                                if(desplazaF2->getPadre()->getId() == desplazaH->getId() || desplazaF2->getMadre()->getId() == desplazaH->getId())
+                                {
+                                    if(desplazaF2->getHijosCab()== nullptr)
+                                    {
+                                        desplazaF2 = desplazaF2->getSig();
+                                    }
+                                    else
+                                    {
+                                        cout << "Nietos de " << persona->getNombre() << " por parte de "<< desplazaH->getNombre() << ": ";
+                                        desplazaF2->imprimirNietos();
+                                        desplazaF2 = desplazaF2->getSig();
+                                    }
+                                }
+                                else
+                                {
+                                    desplazaF2 = desplazaF2->getSig();
+                                }
+                            }
+                            desplazaH = desplazaH->getSig();
+                        }
+                        else
+                        {
+                            desplazaH = desplazaH->getSig();
+                        }
+                    }
+                    desplazaF = desplazaF ->getSig();
+                }
+                else
+                {
+                    desplazaF = desplazaF->getSig();
+                }
+            }
+
+        }
+    }
+
+    cout << endl;
+    //tios sobrinos
+
+    if(persona == nullptr)
+    {
+    }
+    else {
+        cout << "Tercer Grado de Consanguinidad.(Tios, Sobrinos)" << endl;
+
+        // tios
+
+        Persona *papa = persona->getPapa();
+        Persona *mama = persona->getMama();
+
+        Familia *desplazaF = cab;
+        Familia *familia;
+
+
+        while (desplazaF != nullptr) {
+            Persona *desplazaH = desplazaF->getHijosCab();
+            while (desplazaH != nullptr) {
+                if (desplazaH->getId() == papa->getId() || desplazaH->getId() == mama->getId()) {
+                    familia = desplazaF;
+                    desplazaH = desplazaH->getSig();
+                } else {
+                    desplazaH = desplazaH->getSig();
+                }
+            }
+            desplazaF = desplazaF->getSig();
+        }
+
+        bool hermanos = false;
+        Persona *desplaza = familia->getHijosCab();
+        cout << "Tios: " << endl;
+
+        while (desplaza != nullptr)
+        {
+            if (desplaza->getId() == papa->getId() || desplaza->getId() == mama->getId())
+            {
+                desplaza = desplaza->getSig();
+            }
+            else
+            {
+                cout << desplaza->getNombre() << " " << desplaza->getApellidos() << endl;
+                desplaza = desplaza->getSig();
+            }
+        }
+
+        //sobrinos
+
+
+
+    }
+
+
+
+}
+
 void Arbol::interfazPPal()
 {
     int opcion = 0;
@@ -533,7 +766,8 @@ void Arbol::interfazPPal()
                 cout << "7: Consultar nietos de una persona." << endl;
                 cout << "8: Consultar abuelos de una persona." << endl;
                 cout << "9: Consultar padres y hermanos de una persona." << endl;
-                cout << "10: Salir." << endl;
+                cout << "10: Consultar Familiares hasta con tercer grado de consanguinidad." << endl;
+                cout << "11: Salir." << endl;
 
                 cout << "Su opcion: " << endl;
                 cin >> opcion;
@@ -565,10 +799,13 @@ void Arbol::interfazPPal()
                     case 9:
                         padresHermanosPersona();
                         break;
+                    case 10:
+                        familiaresHastaTercer();
+                        break;
                     default:
-                        if (opcion != 10)
+                        if (opcion != 11)
                             cout << endl << "=== Opcion no valida ===" << endl;
                 }
 
-            } while (opcion != 10);
+            } while (opcion != 11);
 }

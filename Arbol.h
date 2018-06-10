@@ -39,5 +39,6 @@ public:
     void nietosPersona();
     void abuelosPersona();
     void padresHermanosPersona();
+    void familiaresHastaTercer();
 };
 #endif //ARBOL_H
