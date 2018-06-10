@@ -25,11 +25,13 @@ Arbol::Arbol()
 Arbol::~Arbol()
 {
     Familia *desplaza = cab;
-
-    while(desplaza != nullptr)
+    Familia *borrar;
+    while (desplaza != nullptr)
     {
-        delete desplaza;
+        borrar = desplaza;
         desplaza = desplaza->getSig();
+        delete borrar;
+        borrar = nullptr;
     }
 }
 
