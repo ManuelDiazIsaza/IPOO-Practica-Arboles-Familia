@@ -93,10 +93,10 @@ Persona Persona::crearPersona()
 
 void Persona::mostrarPersona()
 {
-    cout<<"Nombre: "<<this->nombre<<endl;
-    cout<<"Apellido: "<<this->apellidos<<endl;
-    cout<<"Edad: "<<this->edad<<endl;
-    cout<<"ID: "<<this->id<<endl;
+    cout << "Nombre: " << this->nombre << endl;
+    cout << "Apellido: " << this->apellidos << endl;
+    cout << "Edad: "<< this->edad << endl;
+    cout << "ID: " << this->id << endl;
     //cout<<"Sexo: "<<hombre<<endl;
 }
 

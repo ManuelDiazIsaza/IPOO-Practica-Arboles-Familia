@@ -529,15 +529,21 @@ void Arbol::familiaresHastaTercer()
         //padres
         if (persona->getPapa() != nullptr) {
             cout << "Padres: " << endl;
-            cout << "Papa: " << persona->getPapa()->getNombre() << " " << persona->getPapa()->getApellidos() << endl;
-            cout << "Mama: " << persona->getMama()->getNombre() << " " << persona->getMama()->getApellidos() << endl;
+            cout << "Papa: " << persona->getPapa()->getNombre() << " " << persona->getPapa()->getApellidos();
+                 if(persona->getPapa()->getVivo() == 1)
+                     cout << " - vivo" << endl;
+                 else cout << " - fallecido" << endl;
+            cout << "Mama: " << persona->getMama()->getNombre() << " " << persona->getMama()->getApellidos();
+            if(persona->getMama()->getVivo() == 1)
+                cout << " - vivo" << endl;
+            else cout << " - fallecido" << endl;
         }
         //hijos
         Familia *desplazaF = cab;
 
         while (desplazaF != nullptr) {
             if (desplazaF->getPadre()->getId() == id || desplazaF->getMadre()->getId() == id) {
-                desplazaF->imprimirHijos();
+                desplazaF->imprimirHijos2();
                 desplazaF = desplazaF->getSig();
             } else {
                 desplazaF = desplazaF->getSig();
@@ -565,15 +571,27 @@ void Arbol::familiaresHastaTercer()
         {
             cout << "Abuelos" << endl;
             cout << "Los abuelos por parte de papa son: " << endl;
-            cout << "Abuelo: " <<persona->getPapa()->getPapa()->getNombre() << " " << persona->getPapa()->getPapa()->getApellidos() << endl;
-            cout << "Abuela: " <<persona->getPapa()->getMama()->getNombre() << " " << persona->getPapa()->getMama()->getApellidos() << endl;
+            cout << "Abuelo: " <<persona->getPapa()->getPapa()->getNombre() << " " << persona->getPapa()->getPapa()->getApellidos();
+            if(persona->getPapa()->getPapa()->getVivo() == 1)
+                cout << " - vivo" << endl;
+            else cout << " - fallecido" << endl;
+            cout << "Abuela: " <<persona->getPapa()->getMama()->getNombre() << " " << persona->getPapa()->getMama()->getApellidos();
+            if(persona->getPapa()->getMama()->getVivo() == 1)
+                cout << " - vivo" << endl;
+            else cout << " - fallecido" << endl;
         }
         else if(persona->getMama()->getMama()!= nullptr)
         {
             cout << "Abuelos" << endl;
             cout << "Los abuelos por parte de mama son: " << endl;
-            cout << "Abuelo: " <<persona->getMama()->getPapa()->getNombre() << " " << persona->getMama()->getPapa()->getApellidos() << endl;
-            cout << "Abuela: " <<persona->getMama()->getMama()->getNombre() << " " << persona->getMama()->getMama()->getApellidos() << endl;
+            cout << "Abuelo: " <<persona->getMama()->getPapa()->getNombre() << " " << persona->getMama()->getPapa()->getApellidos();
+            if(persona->getMama()->getPapa()->getVivo() == 1)
+                cout << " - vivo" << endl;
+            else cout << " - fallecido" << endl;
+            cout << "Abuela: " <<persona->getMama()->getMama()->getNombre() << " " << persona->getMama()->getMama()->getApellidos();
+            if(persona->getMama()->getMama()->getVivo() == 1)
+                cout << " - vivo" << endl;
+            else cout << " - fallecido" << endl;
         }
         else
         {
@@ -618,7 +636,10 @@ void Arbol::familiaresHastaTercer()
             else
             {
                 hermanos = true;
-                cout << desplaza->getNombre() << " " << desplaza->getApellidos() << endl;
+                cout << desplaza->getNombre() << " " << desplaza->getApellidos();
+                if(desplaza->getVivo() == 1)
+                    cout << " - vivo" << endl;
+                else cout << " - fallecido" << endl;
                 desplaza = desplaza->getSig();
             }
         }
@@ -660,8 +681,8 @@ void Arbol::familiaresHastaTercer()
                                     }
                                     else
                                     {
-                                        cout << "Nietos de " << persona->getNombre() << " por parte de "<< desplazaH->getNombre() << ": ";
-                                        desplazaF2->imprimirNietos();
+                                        cout << "Nietos por parte de "<< desplazaH->getNombre() << ": ";
+                                        desplazaF2->imprimirNietos2();
                                         desplazaF2 = desplazaF2->getSig();
                                     }
                                 }
@@ -738,7 +759,10 @@ void Arbol::familiaresHastaTercer()
             }
             else
             {
-                cout << desplaza->getNombre() << " " << desplaza->getApellidos() << endl;
+                cout << desplaza->getNombre() << " " << desplaza->getApellidos();
+                if(desplaza->getVivo() == 1)
+                    cout << " - vivo" << endl;
+                else cout << " - fallecido" << endl;
                 desplaza = desplaza->getSig();
             }
         }
@@ -782,7 +806,7 @@ void Arbol::familiaresHastaTercer()
             }
             else
             {
-                cout << "Sobrinos por parte de: " << desplaza2->getNombre() << " " << desplaza2->getApellidos() << endl;
+                cout << "Sobrinos por parte de " << desplaza2->getNombre() << " " << desplaza2->getApellidos() << endl;
 
                 Familia *desplazaF3 = cab;
                 while(desplazaF3!= nullptr)
@@ -790,7 +814,7 @@ void Arbol::familiaresHastaTercer()
                     if(desplazaF3->getPadre()->getId() == desplaza2->getId() || desplazaF3->getMadre()->getId() == desplaza2->getId())
                     {
                         sobrinos = true;
-                        desplazaF3->imprimirNietos();
+                        desplazaF3->imprimirNietos2();
                         desplazaF3 = desplazaF3->getSig();
                         cout << endl;
                     }

@@ -40,7 +40,9 @@ public:
     void nacimiento();
     void nacimiento(int id,string nombre, string apellido, bool hombre, int edad, bool casado); // este nacimiento se usa solo para pruebas
     void imprimirHijos();
+    void imprimirHijos2();
     void imprimirNietos();
+    void imprimirNietos2();
     Persona *getHijosCab();
     void setSig(Familia *sig);
     Familia *getSig();

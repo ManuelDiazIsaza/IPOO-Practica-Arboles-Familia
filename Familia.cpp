@@ -171,6 +171,42 @@ void Familia::imprimirHijos()
         cout << endl;
 }
 
+void Familia::imprimirHijos2()
+{
+    Persona *desplaza = hijoscab;
+
+    if(hijoscab == nullptr)
+    {
+        cout << "Esta familia no tiene hijos.";
+    }
+    else
+    {
+        cout << "Hijo(s): ";
+        while (desplaza != NULL)
+        {
+            if(desplaza->getSig()== nullptr)
+            {
+                cout << desplaza->getNombre() << " " << desplaza->getApellidos();
+                if(desplaza->getVivo() == 1)
+                    cout << "(vivo)" << endl;
+                else cout << "(fallecido)" << endl;
+                desplaza = desplaza->getSig();
+            }
+            else
+            {
+                cout << desplaza->getNombre() << " " << desplaza->getApellidos();
+                if(desplaza->getVivo() == 1)
+                    if(desplaza->getVivo() == 1)
+                        cout << "(vivo)" << " - ";
+                    else cout << "(fallecido)" << " - ";
+                desplaza = desplaza->getSig();
+            }
+
+        }
+    }
+    cout << endl;
+}
+
 void Familia::imprimirNietos()
 {
     Persona *desplaza = hijoscab;
@@ -181,7 +217,6 @@ void Familia::imprimirNietos()
     }
     else
     {
-        //cout << "Hijo(s): ";
         while (desplaza != NULL)
         {
             if(desplaza->getSig()== nullptr)
@@ -192,6 +227,39 @@ void Familia::imprimirNietos()
             else
             {
                 cout << desplaza->getNombre() << " " << desplaza->getApellidos() << " - ";
+                desplaza = desplaza->getSig();
+            }
+        }
+    }
+    cout << endl;
+}
+
+void Familia::imprimirNietos2()
+{
+    Persona *desplaza = hijoscab;
+
+    if(hijoscab == nullptr)
+    {
+        cout << "Esta familia no tiene hijos.";
+    }
+    else
+    {
+        while (desplaza != NULL)
+        {
+            if(desplaza->getSig()== nullptr)
+            {
+                cout << desplaza->getNombre() << " " << desplaza->getApellidos();
+                if(desplaza->getVivo() == 1)
+                    cout << "(vivo)";
+                else cout << "(fallecido)";
+                desplaza = desplaza->getSig();
+            }
+            else
+            {
+                cout << desplaza->getNombre() << " " << desplaza->getApellidos();
+                if(desplaza->getVivo() == 1)
+                    cout << "(vivo)" <<  " - ";
+                else cout << "(fallecido)" <<  " - ";
                 desplaza = desplaza->getSig();
             }
         }
