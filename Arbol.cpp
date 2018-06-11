@@ -796,7 +796,7 @@ void Arbol::familiaresHastaTercer()
         {
         bool sobrinos = false;
         Persona *desplaza2 = familia2->getHijosCab();
-        cout << endl << "Sobrinos: " << endl;
+        cout << "Sobrinos: " << endl;
 
         while(desplaza2!= nullptr)
         {
@@ -816,7 +816,7 @@ void Arbol::familiaresHastaTercer()
                         sobrinos = true;
                         desplazaF3->imprimirNietos2();
                         desplazaF3 = desplazaF3->getSig();
-                        cout << endl;
+                        //cout << endl;
                     }
                     else
                     {
